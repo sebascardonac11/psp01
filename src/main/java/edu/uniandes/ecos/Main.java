@@ -11,6 +11,8 @@ import java.sql.*;
 
 public class Main extends HttpServlet {
 
+    private Count file = null;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -25,8 +27,10 @@ public class Main extends HttpServlet {
     private void showHome(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         resp.getWriter().println("Hello from Java!");
-        Count file = new Count("resource/");
-        file.getSummary(resp);
+        if (this.file == null) {
+            this.file = new Count("resource/");
+            file.getSummary(resp);
+        }
     }
 
     private void showDatabase(HttpServletRequest req, HttpServletResponse resp)

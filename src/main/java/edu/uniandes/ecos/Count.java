@@ -36,18 +36,28 @@ public class Count {
     /**
      * Metodo que inicia el conteo de ficheros.
      */
-    private void count() {
+    private void count() {       
         String[] pathFiles = dir.list();
         File[] files=dir.listFiles();
         if (pathFiles == null) {
             System.out.println("No hay ficheros en el directorio especificado");
         } else {
             for (int x = 0; x < pathFiles.length; x++) {
-               this.files.add(new PropertyFile(pathFiles[x],files[x]));
+                 if(pathFiles[x].contains(".java") && !this.isFile(pathFiles[x]))
+                    this.files.add(new PropertyFile(pathFiles[x],files[x]));
             }
         }
     }
 
+    private boolean isFile(String nom){
+        boolean flag=true;
+        for (int i = 0; (i < this.files.size()&& flag); i++) {
+            if(((PropertyFile)this.files.get(i)).getNom().equals(nom)){
+                flag=false;
+            }
+        }
+        return !flag;
+    }
     /**
      *
      * @param resp
