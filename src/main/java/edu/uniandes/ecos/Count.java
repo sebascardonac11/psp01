@@ -6,7 +6,9 @@
 package edu.uniandes.ecos;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Esta clase se encarga de ubicar el directorio pasado al constructor y a
@@ -45,10 +47,18 @@ public class Count {
             }
         }
     }
-    public String getSummary(){
+
+    /**
+     *
+     * @param resp
+     * @return
+     * @throws IOException
+     */
+    public String getSummary(HttpServletResponse resp) throws IOException{
         String res="";
-        for (int i = 0; i < this.files.size(); i++) {
-            res+= " "+ ((PropertyFile)this.files.get(i)).getNom()+ "  Numero de lineas:"+ ((PropertyFile)this.files.get(i)).getCount() + "\n";
+        for (int i=0; i<this.files.size();i++) {
+            res = " Archivo: ("+(i+1)+")" + ((PropertyFile) this.files.get(i)).getNom() + "  Numero de lineas:" + ((PropertyFile) this.files.get(i)).getCount() + "";
+            resp.getWriter().println(res);
         }
         return res;
     }

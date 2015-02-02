@@ -6,10 +6,10 @@ package edu.uniandes.ecos;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main2( String[] args )
     {
         System.out.println( "Hello World!" );
         Count file = new Count("resource/");
-        System.out.println(file.getSummary());
+     //   System.out.println(file.getSummary());
     }
 }
